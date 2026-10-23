@@ -11,6 +11,12 @@ for company in COMPANIES:
     url = f"https://api.lever.co/v0/postings/{company}?mode=json"
     # Timeout stops the script from hanging forever if Lever doesn't respond.
     response = requests.get(url, timeout=10)
+
+    # 200 means success. Anything else means the company wasn't found or Lever had a problem.
+    if response.status_code != 200:
+        print(f"Skipping {company}: status {response.status_code}")
+        continue  # jump to the next company
+
     # Converts the JSON text into Python objects we can work with.
     postings = response.json()
     # print how many postings were found
