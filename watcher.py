@@ -1,7 +1,12 @@
 import requests
 
 # list of companies we're going to be looking at
-COMPANIES = ["magnetforensics", "achievers", "evr"]
+COMPANIES = [
+    "magnetforensics", "achievers", "evr",
+    "kepler", "waabi", "eqbank", "acceldata", "fullscript", "shyftlabs", "gomaterials",
+    "kabam", "pointclickcare", "telesat", "syntronic", "osedea", "altaml",
+    "promiserobotics", "blackbirdinteractive",
+]
 
 # initilize a list with terms for summer coops
 SUMMER_TERMS = ["may 2027", "summer 2027"]
