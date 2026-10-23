@@ -42,13 +42,14 @@ for company in COMPANIES:
         title_lower = title.lower()
         # .get() returns None instead of crashing if a posting has no location.
         location = posting["categories"].get("location")
-        commitment = posting["categories"].get("commitment", "").lower()
+        commitment = posting["categories"].get("commitment", "")
+        commitment_lower = commitment.lower()
 
         is_coop = False
 
         # check the commitment for any student term
         for term in COMMITMENT_TERMS:
-            if term in commitment:
+            if term in commitment_lower:
                 is_coop = True
                 break
 
