@@ -3,8 +3,11 @@ import requests
 # list of companies we're going to be looking at
 COMPANIES = ["magnetforensics", "achievers", "evr"]
 
-# initialize a variable for the number of coop postings
-coop_count = 0
+# initilize a list with terms for summer coops
+SUMMER_TERMS = ["may 2027", "summer 2027"]
+
+# initialize a variable for the number of coop postings for summer
+summer_count = 0
 
 # loop through the companies
 for company in COMPANIES:
@@ -25,12 +28,20 @@ for company in COMPANIES:
     # loop through the postings
     for posting in postings:
         title = posting["text"] # Lever calls the job title "text"
+        title_lower = title.lower()
         # .get() returns None instead of crashing if a posting has no location.
         location = posting["categories"].get("location")
         commitment = posting["categories"].get("commitment", "").lower()
         # check if the posting is for a co-op
         if "co-op" in commitment or "coop" in commitment:
-            print(f"{title} | {location} | {commitment}") # print job info
-            coop_count += 1 # increment the number of coops found
+            is_summer = False
+            for term in SUMMER_TERMS:
+                if term in title_lower:
+                    is_summer = True
+                    break
 
-print(f"{coop_count} co-op postings") # print how many coop postings were found
+            if is_summer:
+                print(f"{title} | {location} | {commitment}") # print job info
+                summer_count += 1 # increment the number of coops found
+
+print(f"{summer_count} Summer 2027 co-op postings") # print how many coop postings were found
