@@ -58,6 +58,8 @@ for company in COMPANIES:
 
         is_coop = False
 
+        link = posting["hostedUrl"]
+
         # check the commitment for any student term
         for term in COMMITMENT_TERMS:
             if term in commitment_lower:
@@ -80,7 +82,7 @@ for company in COMPANIES:
                     break
 
             if is_summer:
-                print(f"{title} | {location} | {commitment}") # print job info
+                print(f"{title} | {location} | {commitment} | {link}") # print job info
                 summer_count += 1 # increment the number of coops found
             else:
                 # skip co-ops whose title names a known non-summer term
@@ -91,7 +93,7 @@ for company in COMPANIES:
                         break
 
                 if not is_other_term:
-                    other_coops.append(f"{company} | {title} | {location} | {commitment}")
+                    other_coops.append(f"{company} | {title} | {location} | {commitment} | {link}")
 
 
 print(f"{summer_count} Summer 2027 co-op postings") # print how many coop postings were found
