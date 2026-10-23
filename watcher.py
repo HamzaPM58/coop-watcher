@@ -47,13 +47,13 @@ for company in COMPANIES:
         title = posting["text"] # Lever calls the job title "text"
         title_lower = title.lower()
 
-        description = posting.get("descriptionPlain", "")
+        description = posting.get("descriptionPlain") or ""
         description_lower = description.lower()
 
         # .get() returns None instead of crashing if a posting has no location.
         location = posting["categories"].get("location")
 
-        commitment = posting["categories"].get("commitment", "")
+        commitment = posting["categories"].get("commitment") or ""
         commitment_lower = commitment.lower()
 
         is_coop = False
