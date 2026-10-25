@@ -11,9 +11,6 @@ COMPANIES = [
 # initilize a list with terms for summer coops
 SUMMER_TERMS = ["may 2027", "summer 2027"]
 
-# initialize a variable for the number of coop postings for summer
-summer_count = 0
-
 # terms that mark a student role in the commitment field
 COMMITMENT_TERMS = ["co-op", "coop", "intern", "student"]
 
@@ -23,6 +20,9 @@ TITLE_TERMS = ["co-op", "coop"]
 # create a list for coops that don't match out search criteria
 other_coops = []
 
+# create a list for summer coops
+summer_coops = []
+
 # create a list for terms we don't need
 OTHER_TERMS = ["winter 2027", "january 2027", "fall 2026"]
 
@@ -30,7 +30,11 @@ OTHER_TERMS = ["winter 2027", "january 2027", "fall 2026"]
 for company in COMPANIES:
     url = f"https://api.lever.co/v0/postings/{company}?mode=json"
     # Timeout stops the script from hanging forever if Lever doesn't respond.
-    response = requests.get(url, timeout=10)
+    try:
+        response = requests.get(url, timeout=20)
+    except requests.exceptions.RequestException as error:
+        print(f"Skipping {company}: {error}")
+        continue  # jump to the next company
 
     # 200 means success. Anything else means the company wasn't found or Lever had a problem.
     if response.status_code != 200:
@@ -82,8 +86,7 @@ for company in COMPANIES:
                     break
 
             if is_summer:
-                print(f"{title} | {location} | {commitment} | {link}") # print job info
-                summer_count += 1 # increment the number of coops found
+                summer_coops.append(f"{company} | {title} | {location} | {commitment} | {link}")
             else:
                 # skip co-ops whose title names a known non-summer term
                 is_other_term = False
@@ -96,7 +99,10 @@ for company in COMPANIES:
                     other_coops.append(f"{company} | {title} | {location} | {commitment} | {link}")
 
 
-print(f"{summer_count} Summer 2027 co-op postings") # print how many coop postings were found
+print(f"{len(summer_coops)} Summer 2027 co-op postings") # print how many coop postings were found
+for coop in summer_coops:
+    print(coop)
+
 print(f"{len(other_coops)} co-ops with no clear term (check by hand):")
 
 # loop through coops
