@@ -5,10 +5,10 @@ COMPANIES = [
     "magnetforensics", "achievers", "evr",
     "kepler", "waabi", "eqbank", "acceldata", "fullscript", "shyftlabs", "gomaterials",
     "kabam", "pointclickcare", "telesat", "syntronic", "osedea", "altaml",
-    "promiserobotics", "blackbirdinteractive",
+    "promiserobotics", "blackbirdinteractive", "waveapps",
 ]
 
-# initilize a list with terms for summer coops
+# initialize a list with terms for summer coops
 SUMMER_TERMS = ["may 2027", "summer 2027"]
 
 # terms that mark a student role in the commitment field
@@ -17,7 +17,7 @@ COMMITMENT_TERMS = ["co-op", "coop", "intern", "student"]
 # terms safe to match in the title ("intern" would also match "internal")
 TITLE_TERMS = ["co-op", "coop"]
 
-# create a list for coops that don't match out search criteria
+# create a list for coops that don't match our search criteria
 other_coops = []
 
 # create a list for summer coops
